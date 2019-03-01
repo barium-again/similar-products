@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import CarouselItem from '../CarouselItem';
-import styles from './Carousel2.css';
-import Modal from '../Modal/ModalContainer';
-import ArrowL from './ArrowL.jsx';
-import ArrowR from './ArrowR.jsx';
-import Bottom from '../Bottom';
-import axios from 'axios';
+import React, { Component } from "react";
+import CarouselItem from "../CarouselItem";
+import styles from "./Carousel2.css";
+import Modal from "../Modal/ModalContainer";
+import ArrowL from "./ArrowL.jsx";
+import ArrowR from "./ArrowR.jsx";
+import Bottom from "../Bottom";
+import axios from "axios";
 
 class Carousel extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Carousel extends Component {
 
   componentDidMount() {
     axios
-      .get(`/like`)
+      .get(`/like/1`)
       .then(({ data }) => {
         this.setState({ list: [...data] });
       })
@@ -74,7 +74,6 @@ class Carousel extends Component {
                     showModal={this.showModal}
                     handleLove={this.handleLove}
                     loved={this.state.loved}
-
                     name={item.product_name}
                     category={item.category}
                     size={item.size}
@@ -97,28 +96,27 @@ class Carousel extends Component {
 
             {this.state.list.map((item, i) => (
               <Modal
-              key={i}
-              onClose={this.showModal}
-              loved={this.state.loved}
-              handleLove={this.handleLove}
-
-              show={this.state.show === i}
-              name={item.product_name}
-              category={item.category}
-              size={item.size}
-              description={item.description}
-              sku={item.sku}
-              stars={item.stars}
-              reviews={item.reviews}
-              badge={item.badge}
-              loves={item.loves}
-              exclusive={item.exclusive}
-              online={item.online}
-              limited={item.limited}
-              free={item.free}
-              price={item.price}
-              image={item.image}
-            />
+                key={i}
+                onClose={this.showModal}
+                loved={this.state.loved}
+                handleLove={this.handleLove}
+                show={this.state.show === i}
+                name={item.product_name}
+                category={item.category}
+                size={item.size}
+                description={item.description}
+                sku={item.sku}
+                stars={item.stars}
+                reviews={item.reviews}
+                badge={item.badge}
+                loves={item.loves}
+                exclusive={item.exclusive}
+                online={item.online}
+                limited={item.limited}
+                free={item.free}
+                price={item.price}
+                image={item.image}
+              />
             ))}
 
             <button
@@ -145,7 +143,7 @@ class Carousel extends Component {
         </div>
       );
     }
-    return <div/>;
+    return <div />;
   }
 }
 
