@@ -1,5 +1,6 @@
 const { Readable } = require("stream");
-const faker = require("faker");
+const fake = require("faker");
+// const fake = Faker();
 const {
   randomNumberDec,
   randomNumberInt,
@@ -15,31 +16,23 @@ class ReadDocuments extends Readable {
   }
 
   _read(size) {
-    let products = {};
-
-    products.productName = faker.lorem.word();
-    products.description = faker.lorem.sentence();
-    products.size = randomNumberArr(randomNumberInt(1, 5));
-    products.sku = randomNumberInt(1000000, 2000000);
-    products.stars = randomNumberDec(0, 5);
-    products.reviews = randomNumberInt(0, 1000);
-    products.newBadge = Math.random() >= 0.9;
-    products.loves = randomNumberInt(0, 200000);
-    products.exclusive = Math.random() >= 0.7;
-    products.online_only = Math.random() >= 0.7;
-    products.limited_edition = Math.random() >= 0.8;
-    products.free_shipping = Math.random() >= 0.7;
-    products.price = `$${randomNumberDec(1, 200)}`;
-    products.image = `https://picsum.photos/300/300/?image=${Math.floor(
-      Math.random() * 1000
-    ) + 1}`;
-
-    products = JSON.stringify(products);
-    if (this.count === 0) this.push("[");
-    this.push(products);
+    let string = `${this.count},${fake.lorem.word()},"{${randomNumberArr(
+      randomNumberInt(1, 5)
+    )}}",${fake.lorem.word()},${fake.lorem.sentence(5)},${randomNumberInt(
+      1000000,
+      2000000
+    )},${randomNumberDec(0, 5)},${randomNumberInt(0, 1000)},${Math.random() >=
+      0.9},${randomNumberInt(0, 200000)},${Math.random() >=
+      0.7},${Math.random() >= 0.7},${Math.random() >= 0.8},${Math.random() >=
+      0.7},$${randomNumberDec(
+      1,
+      200
+    )},https://picsum.photos/300/300/?image=${Math.floor(Math.random() * 1000) +
+      1} \n`;
     if (this.count === 1e7 - 1) {
-      this.push("]");
       this.push(null);
+    } else {
+      this.push(string);
     }
     this.count += 1;
   }

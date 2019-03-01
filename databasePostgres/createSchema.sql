@@ -1,15 +1,15 @@
-create database similarproducts
-
-\c similarproducts
+\c
+similarproducts
 
 DROP TABLE IF EXISTS Products;
 
 CREATE TABLE Products
 (
-    id INTEGER not null
-    AUTO_INCREMENT,
+  id INTEGER not null
+  AUTO_INCREMENT,
   product_name VARCHAR
   size INTEGER,
+  category VARCHAR,
   descript VARCHAR,
   sku INTEGER,
   stars INTEGER,
@@ -23,17 +23,8 @@ CREATE TABLE Products
   price INTEGER,
   img VARCHAR,
     PRIMARY KEY
-    (id)
+  (id)
 );
-    DROP TABLE IF EXISTS Category;
 
-    create table Category
-    (
-        id INTEGER not null
-        AUTO_INCREMENT,
-        category VARCHAR,
-PRIMARY KEY
-        (id)
-)
 -- foreign keys
 

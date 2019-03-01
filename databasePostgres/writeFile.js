@@ -4,4 +4,4 @@ const fs = require("fs");
 let data = new ReadDocuments();
 
 // data.pipe(process.stdout);
-data.pipe(fs.createWriteStream("./data.json"));
+data.pipe(fs.createWriteStream("./data.csv"));

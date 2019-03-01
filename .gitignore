@@ -25,4 +25,8 @@ build/
 dist/
 public/bundle.js
 
-./databasePostgres/data.json
+databasePostgres/data.csv
+databasePostgres/oneData.csv
+databaseMongo/data.json
+databaseMongo/tenData.json
+
