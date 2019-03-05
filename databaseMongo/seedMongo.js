@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/similarproducts", {
-  useNewUrlParser: true
-});
+const autoIncrement = require("mongoose-auto-increment");
+const connection = mongoose.createConnection(
+  "mongodb://localhost/similarproducts",
+  {
+    useNewUrlParser: true
+  }
+);
+
+autoIncrement.initialize(connection);
+
 const Schema = mongoose.Schema;
 
 const similarSchema = new Schema({
+  productid: Number,
   productname: String,
   size: String,
   categories: String,
@@ -22,4 +30,8 @@ const similarSchema = new Schema({
   image: String
 });
 
-const Products = mongoose.model("Products", similarSchema);
+similarSchema.index({ productid: 1 });
+
+const Products = connection.model("Products", similarSchema);
+
+// mongoimport --db similarproducts --collection Products <data.json --jsonArray
