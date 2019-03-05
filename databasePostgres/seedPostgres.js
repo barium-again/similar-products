@@ -12,7 +12,7 @@ sequelize
 const Products = sequelize.define(
   "products",
   {
-    id: { type: Sequelize.INTEGER, primaryKey: true },
+    id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
     productname: Sequelize.STRING,
     size: Sequelize.ARRAY(Sequelize.REAL),
     categories: Sequelize.STRING,
@@ -31,6 +31,9 @@ const Products = sequelize.define(
   },
   { timestamps: false }
 );
+
+// productname, size, categories,description, sku, stars,reviews, newbadge, loves, exclusive, online_only, liminted_edition, free_shipping, price, image
+// \copy products (productname, size, categories,description, sku, stars,reviews, newbadge, loves, exclusive, online_only, limited_edition, free_shipping, price, image) from './databasePostgres/data.csv' delimiters ',' csv;
 
 sequelize
   .sync({ force: true })

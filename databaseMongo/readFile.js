@@ -16,7 +16,7 @@ class ReadDocuments extends Readable {
 
   _read(size) {
     let products = {};
-
+    products.productid = this.count;
     products.productName = faker.lorem.word();
     products.size = randomNumberArr(randomNumberInt(1, 5));
     products.categories = faker.lorem.sentence();

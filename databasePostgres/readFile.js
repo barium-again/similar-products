@@ -16,7 +16,7 @@ class ReadDocuments extends Readable {
   }
 
   _read(size) {
-    let string = `${this.count},${fake.lorem.word()},"{${randomNumberArr(
+    let string = `${fake.lorem.word()},"{${randomNumberArr(
       randomNumberInt(1, 5)
     )}}",${fake.lorem.word()},${fake.lorem.sentence(5)},${randomNumberInt(
       1000000,
