@@ -11,7 +11,8 @@
   "scripts": {
     "start": "nodemon ./server/index.js",
     "build": "webpack --watch",
-    "seed": "node ./database/seed.js"
+    "seedpostgres": "node ./databasePostgres/index.js",
+    "seedmongo": "node ./databaseMongo/index.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
