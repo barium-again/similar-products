@@ -26,6 +26,9 @@ dist/
 public/bundle.js
 
 databasePostgres/data.csv
+databasePostgres/products.csv
+databasePostgres/categories.csv
+databasePostgres/reviews.csv
 databasePostgres/oneData.csv
 databaseMongo/data.json
 databaseMongo/tenData.json
