@@ -1,7 +1,8 @@
-const { ReadDocuments } = require("./readFile.js");
+const { ReadProductsTable } = require("./readProductsTable.js");
 const fs = require("fs");
+const path = require("path");
 
-let data = new ReadDocuments();
+let productsCSV = new ReadProductsTable();
 
 // data.pipe(process.stdout);
-data.pipe(fs.createWriteStream("./data.csv"));
+productsCSV.pipe(fs.createWriteStream(path.resolve(__dirname, "./products.csv")));
