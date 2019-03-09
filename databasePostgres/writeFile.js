@@ -8,7 +8,7 @@ let productsCSV = new ReadProductsTable();
 let categoriesCSV = new ReadCategoriesTable();
 let reviewsCSV = new ReadReviewsTable();
 
-data.pipe(process.stdout);
+// data.pipe(process.stdout);
 productsCSV.pipe(
   fs.createWriteStream(path.resolve(__dirname, "./products.csv"))
 );
