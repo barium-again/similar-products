@@ -2,7 +2,7 @@ const { Pool } = require("pg");
 const path = require("path");
 
 const pool = new Pool({
-  user: "badwolf",
+  user: "postgres",
   database: "similarproducts",
   password: ""
 });
@@ -69,7 +69,6 @@ pool.connect().then(() => {
     });
   });
 });
-
 
 module.exports = { pool };
 
