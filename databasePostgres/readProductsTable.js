@@ -51,8 +51,7 @@ class ReadProductsTable extends Readable {
       Math.random() * 1000
     ) + 1}`;
     let categories_id = Math.floor(randomNumberDec(1, 1e7));
-    let reviews_id = Math.floor(randomNumberDec(1, 1e7));
-    let string = `${product_name},"{${product_size}}",${descriptions},${sku},${dateAdded},${loves},${exclusive},${online_only},${limited_edition},${free_shipping},$${price}, ${product_image}, ${categories_id}, ${reviews_id} \n`;
+    let string = `${product_name},"{${product_size}}",${descriptions},${sku},${dateAdded},${loves},${exclusive},${online_only},${limited_edition},${free_shipping},$${price}, ${product_image}, ${categories_id}\n`;
     if (this.count === 1e7 - 1) {
       this.push(null);
     } else {

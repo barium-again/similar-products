@@ -53,8 +53,27 @@ const findAverageTime = arr => {
 //     .catch(err => console.log(err))
 // }
 
+// let timeCat = []
+const getProductByCat = (req, res) => {
+  let { category } = req.params;
+  // console.log("Generating time as we speak ... ");
+  // const time = process.hrtime();
+  pool
+    .query(
+      `SELECT * from categories c inner join products p on c.id=p.categories_id inner join reviews r on p.id = r.prod_id where c.categories = '${category}' limit 15;`
+    )
+    .then(data => {
+      // // const diff = process.hrtime(time);
+      // timeCat.push(Number((diff[1] / 1e6).toFixed(2)));
+      // console.log(findAverageTime(timeCat), timeCat);
+      return res.status(200).json(data.rows);
+    })
+    .catch(err => console.log("this is the error", err));
+};
+
 module.exports = {
   getByProductId,
   getLike,
-  getByProductName
+  getByProductName,
+  getProductByCat
 };

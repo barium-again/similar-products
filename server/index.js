@@ -8,7 +8,8 @@ const PORT = 3004;
 const {
   getByProductId,
   getLike,
-  getByProductName
+  getByProductName,
+  getProductByCat
 } = require("./controller.js");
 
 const app = express();
@@ -22,5 +23,6 @@ app.use(express.static(path.resolve(__dirname, "../public")));
 app.get("/productid/:productid", getByProductId);
 app.get("/like/:id", getLike);
 app.get("/productname/:productname", getByProductName);
+app.get("/category/:category", getProductByCat);
 
 app.listen(PORT, () => console.log("Listening to port ", PORT));

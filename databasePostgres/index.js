@@ -8,7 +8,7 @@ const pool = new Pool({
 });
 
 let text =
-  "create table if not exists categories( id bigserial not null primary key, categories varchar (30)); create table if not exists reviews ( id bigserial not null primary key, count integer, star_avg integer); create table if not exists products( id bigserial primary key, product_name varchar (225) not null, size real[], descriptions varchar(350), sku real, dateAdded varchar(250), loves real, exclusive varchar (5), online_only varchar (5), limited_edition varchar (5), free_shipping varchar (5), price varchar(7), product_image varchar (350), categories_id integer, reviews_id integer);";
+  "create table if not exists categories( id bigserial not null primary key, categories varchar (30)); create table if not exists reviews ( id bigserial not null primary key, count integer, star_avg integer, prod_id integer); create table if not exists products( id bigserial primary key, product_name varchar (225) not null, size real[], descriptions varchar(350), sku real, dateAdded varchar(250), loves real, exclusive varchar (5), online_only varchar (5), limited_edition varchar (5), free_shipping varchar (5), price varchar(7), product_image varchar (350), categories_id integer);";
 
 pool.connect().then(() => {
   console.log("Pool connection established");
@@ -19,7 +19,7 @@ pool.connect().then(() => {
         console.log("database is seating now...");
         return pool
           .query(
-            `copy products (product_name, size,descriptions, sku, dateAdded, loves, exclusive, online_only, limited_edition, free_shipping, price, product_image, categories_id, reviews_id) from '${path.resolve(
+            `copy products (product_name, size,descriptions, sku, dateAdded, loves, exclusive, online_only, limited_edition, free_shipping, price, product_image, categories_id) from '${path.resolve(
               __dirname,
               "./products.csv"
             )}' delimiters ',' csv;`
@@ -37,7 +37,7 @@ pool.connect().then(() => {
                 console.log("Categories seated, yay!");
                 return pool
                   .query(
-                    `copy reviews (count, star_avg) from '${path.resolve(
+                    `copy reviews (count, star_avg, prod_id) from '${path.resolve(
                       __dirname,
                       "./reviews.csv"
                     )}' delimiters ',' csv;`
@@ -49,15 +49,19 @@ pool.connect().then(() => {
                         "alter table products add constraint fkey foreign key (categories_id) references categories (id);"
                       )
                       .then(() => {
-                        console.log("Categories foreign key added, yay!");
+                        console.log(
+                          "Categories foreign key added to products table, yay!"
+                        );
                         return pool.query(
-                          "alter table products add constraint fkey2 foreign key (reviews_id) references reviews (id);"
+                          "alter table reviews add constraint fkey2 foreign key (prod_id) references products (id);"
                         );
                       });
                   });
               });
           })
-          .then(() => console.log("Reviews foreign key added, yay!"))
+          .then(() =>
+            console.log("Products foreign key added to reviews table, yay!")
+          )
           .catch(err => console.log(err));
       } else {
         console.log("database was not seated");
@@ -66,4 +70,7 @@ pool.connect().then(() => {
   });
 });
 
+
 module.exports = { pool };
+
+// copy categories (categories) from '/Users/badwolf/HR_files/similar-products/databasePostgres/categories.csv' delimiters ',' csv
