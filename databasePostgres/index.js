@@ -4,7 +4,7 @@ const path = require("path");
 const pool = new Pool({
   user: "postgres",
   database: "similarproducts",
-  password: ""
+  password: "badwolf"
 });
 
 let text =
