@@ -25,7 +25,7 @@ class Carousel extends Component {
 
   componentDidMount() {
     axios
-      .get(`/like/1`)
+      .get(`/category`)
       .then(({ data }) => {
         this.setState({ list: [...data] });
       })
@@ -75,20 +75,20 @@ class Carousel extends Component {
                     handleLove={this.handleLove}
                     loved={this.state.loved}
                     name={item.product_name}
-                    category={item.category}
+                    category={item.categories}
                     size={item.size}
-                    description={item.description}
+                    description={item.descriptions}
                     sku={item.sku}
-                    stars={item.stars}
-                    reviews={item.reviews}
-                    badge={item.badge}
+                    stars={item.star_avg}
+                    reviews={item.count}
+                    badge={item.dateadded}
                     loves={item.loves}
                     exclusive={item.exclusive}
                     online={item.online_only}
                     limited={item.limited_edition}
                     free={item.free_shipping}
                     price={item.price}
-                    image={item.image}
+                    product_image={item.product_image}
                   />
                 ))}
               </div>
@@ -104,18 +104,18 @@ class Carousel extends Component {
                 name={item.product_name}
                 category={item.category}
                 size={item.size}
-                description={item.description}
+                description={item.descriptions}
                 sku={item.sku}
-                stars={item.stars}
-                reviews={item.reviews}
-                badge={item.badge}
+                stars={item.star_avg}
+                reviews={item.count}
+                badge={item.dateadded}
                 loves={item.loves}
                 exclusive={item.exclusive}
                 online={item.online}
                 limited={item.limited}
-                free={item.free}
+                free={item.free_shipping}
                 price={item.price}
-                image={item.image}
+                product_image={item.product_image}
               />
             ))}
 

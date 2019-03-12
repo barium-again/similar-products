@@ -1,28 +1,12 @@
-const express = require("express");
-const path = require("path");
-const parser = require("body-parser");
-const morgan = require("morgan");
-const PORT = 3004;
-// const seed = require("../database/seed.js");
-// const db = require("../database/index.js");
-const {
-  getByProductId,
-  getLike,
-  getByProductName,
-  getProductByCat
-} = require("./controller.js");
+const dotenv = require("dotenv");
+const dotenvExpand = require("dotenv-expand");
+const myEnv = dotenv.config();
+dotenvExpand(myEnv);
 
-const app = express();
+const { app, startApp } = require("./app.js");
 
-app.use(morgan("dev"));
-app.use(parser.json());
-app.use(parser.urlencoded({ extended: true }));
-
-app.use(express.static(path.resolve(__dirname, "../public")));
-
-app.get("/productid/:productid", getByProductId);
-app.get("/like/:id", getLike);
-app.get("/productname/:productname", getByProductName);
-app.get("/category/:category", getProductByCat);
-
-app.listen(PORT, () => console.log("Listening to port ", PORT));
+startApp().then(() =>
+  app.listen(process.env.PORT, () => {
+    console.log("Listening on port: ", process.env.PORT);
+  })
+);

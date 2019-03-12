@@ -25,9 +25,9 @@ class Carousel extends Component {
 
   componentDidMount() {
     axios
-      .get(`/similar/1`)
+      .get(`/category`)
       .then(({ data }) => {
-        this.setState({ list: [...data] });
+        this.setState({ list: [...data] }, () => console.log(this.state.list));
       })
       .catch(err => console.log(err));
   }
@@ -75,20 +75,20 @@ class Carousel extends Component {
                     handleLove={this.handleLove}
                     loved={this.state.loved}
                     name={item.product_name}
-                    category={item.category}
+                    categories={item.categories}
                     size={item.size}
-                    description={item.description}
+                    description={item.descriptions}
                     sku={item.sku}
-                    stars={item.stars}
-                    reviews={item.reviews}
-                    badge={item.badge}
+                    star_avg={item.star_avg}
+                    count={item.count}
+                    badge={item.dateadded}
                     loves={item.loves}
                     exclusive={item.exclusive}
                     online={item.online_only}
                     limited={item.limited_edition}
                     free={item.free_shipping}
                     price={item.price}
-                    image={item.image}
+                    product_image={item.product_image}
                   />
                 ))}
               </div>
@@ -102,20 +102,20 @@ class Carousel extends Component {
                 handleLove={this.handleLove}
                 show={this.state.show === i}
                 name={item.product_name}
-                category={item.category}
+                category={item.categories}
                 size={item.size}
-                description={item.description}
+                description={item.descriptions}
                 sku={item.sku}
-                stars={item.stars}
-                reviews={item.reviews}
-                badge={item.badge}
+                stars={item.star_avg}
+                reviews={item.count}
+                badge={item.dateadded}
                 loves={item.loves}
                 exclusive={item.exclusive}
                 online={item.online_only}
                 limited={item.limited_edition}
                 free={item.free_shipping}
                 price={item.price}
-                image={item.image}
+                image={item.product_image}
               />
             ))}
 

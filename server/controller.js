@@ -1,5 +1,6 @@
 // const { SimilarList, LikeList } = require("../database/index.js");
 const { pool } = require("../databasePostgres/index.js");
+const { randomNumberDec } = require("../database/helpers.js");
 
 let productidTime = [];
 const getByProductId = (req, res) => {
@@ -55,25 +56,49 @@ const findAverageTime = arr => {
 
 // let timeCat = []
 const getProductByCat = (req, res) => {
-  let { category } = req.params;
   // console.log("Generating time as we speak ... ");
   // const time = process.hrtime();
+  let categories = [
+    "lips",
+    "eyes",
+    "face",
+    "powder",
+    "contour",
+    "brows",
+    "lip liner",
+    "eye liner",
+    "eye shadow",
+    "blush",
+    "face wash",
+    "face masks",
+    "face serum",
+    "shampoo",
+    "conditioner"
+  ];
+  let category = categories[Math.floor(randomNumberDec(0, categories.length))];
   pool
     .query(
       `SELECT * from categories c inner join products p on c.id=p.categories_id inner join reviews r on p.id = r.prod_id where c.categories = '${category}' limit 15;`
     )
     .then(data => {
-      // // const diff = process.hrtime(time);
-      // timeCat.push(Number((diff[1] / 1e6).toFixed(2)));
-      // console.log(findAverageTime(timeCat), timeCat);
+      data.rows.map(obj => {
+        let year = obj.dateadded.slice(12, 15);
+        obj.dateadded = Number(year) < 2018 ? true : false;
+        return obj;
+      });
       return res.status(200).json(data.rows);
     })
     .catch(err => console.log("this is the error", err));
+};
+
+const verifyLoader = (req, res) => {
+  res.status(200).send("hello");
 };
 
 module.exports = {
   getByProductId,
   getLike,
   getByProductName,
-  getProductByCat
+  getProductByCat,
+  verifyLoader
 };

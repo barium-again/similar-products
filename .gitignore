@@ -33,3 +33,6 @@ databasePostgres/oneData.csv
 databaseMongo/data.json
 databaseMongo/tenData.json
 
+.env
+Dockerfile
+

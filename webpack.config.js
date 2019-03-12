@@ -1,45 +1,46 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: path.resolve(__dirname, './client/src'),
+  entry: path.resolve(__dirname, "./client/src"),
+  watch: true,
   output: {
-    path: path.resolve(__dirname, './public'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "./public"),
+    filename: "bundle.js"
   },
-  mode: 'development',
+  mode: "development",
   module: {
     rules: [
       {
-        loader: 'babel-loader',
+        loader: "babel-loader",
         test: /\.js[x]?/,
         exclude: /node_modules/,
         options: {
-          presets: ['@babel/preset-env', '@babel/preset-react']
+          presets: ["@babel/preset-env", "@babel/preset-react"]
         }
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader"
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
               modules: true,
-              localIdentName: '[local]___[hash:base64:5]'
-              }
-        }
-        ],
+              localIdentName: "[local]___[hash:base64:5]"
+            }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        use: ["file-loader"]
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".js", ".jsx"]
   }
 };

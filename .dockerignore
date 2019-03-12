@@ -1,0 +1,10 @@
+databasePostgres/data.csv
+databasePostgres/products.csv
+databasePostgres/categories.csv
+databasePostgres/reviews.csv
+databaseMongo/data.json
+databaseMongo/tenData.json
+node_modules
+webpack.config.js
+
+.env
